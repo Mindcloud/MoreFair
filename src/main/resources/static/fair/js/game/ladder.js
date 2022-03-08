@@ -389,7 +389,7 @@ function calculateLadder(delta) {
     if (ladderData.rankers.length >= Math.max(infoData.minimumPeopleForPromote, ladderData.currentLadder.number)) {
         let index = ladderData.rankers.length - 1;
         if (ladderData.rankers[index].growing && ladderData.rankers[index].you)
-            ladderData.rankers[index].grapes = ladderData.rankers[index].grapes.add(new Decimal(10).mul(delta).floor());
+            ladderData.rankers[index].grapes = ladderData.rankers[index].grapes.add(new Decimal(3).mul(delta).floor());
     }
 
     // Set yourRanker and firstRanker
@@ -573,6 +573,7 @@ function showButtons() {
     let autoPromoteCost = getAutoPromoteGrapeCost(ladderData.yourRanker.rank);
     if (!ladderData.yourRanker.autoPromote && ladderData.currentLadder.number >= infoData.autoPromoteLadder
         && ladderData.currentLadder.number !== infoData.assholeLadder) {
+
         autoPromoteButton.show();
         if (ladderData.yourRanker.grapes.cmp(autoPromoteCost) >= 0) {
             autoPromoteButton.prop("disabled", false);

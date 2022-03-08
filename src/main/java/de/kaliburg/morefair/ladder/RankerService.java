@@ -310,6 +310,8 @@ public class RankerService implements ApplicationListener<AccountServiceEvent> {
             if (ranker.getRank() == 1 && ranker.getLadder().getRankers().size() >= Math.max(FairController.MINIMUM_PEOPLE_FOR_PROMOTE, ladder.getNumber())
                     && ranker.getPoints().compareTo(FairController.POINTS_FOR_PROMOTE.multiply(BigInteger.valueOf(ranker.getLadder().getNumber()))) >= 0
                     && (ranker.isAutoPromote() || pointDiff.compareTo(neededPointDiff) >= 0)) {
+
+                log.info("[L{}] Promotion for {}", ladder.getNumber(), ranker.getAccount().getUsername());
                 ranker.setGrowing(false);
                 saveRanker(ranker);
                 Ranker newRanker = createNewActiveRankerForAccountOnLadder(ranker.getAccount(), ranker.getLadder().getNumber() + 1);
@@ -325,6 +327,7 @@ public class RankerService implements ApplicationListener<AccountServiceEvent> {
                     account.setIsAsshole(true);
                     accountService.saveAccount(account);
                 }
+                saveRanker(newRanker);
                 return true;
             }
         } catch (Exception e) {
