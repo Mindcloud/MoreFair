@@ -2,7 +2,9 @@
 
 ## Needed:
 
-- PostgreSQL DB
+- PostgreSQL DB (with Password auth enabled)
+- Maven 3.8.3
+- Java JDK 17
 
 ### Commands:
 
